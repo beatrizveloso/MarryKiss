@@ -1,22 +1,117 @@
-const images = [
-  "src/images/personagens/personagem-1.png",
-  "src/images/personagens/personagem-2.png",
-  "src/images/personagens/personagem-3.png",
-  "src/images/personagens/personagem-4.png",
-  "src/images/personagens/personagem-5.png"
-];
+ const totalCharacters = 30;
+        const selectedIndexes = [];
+        
+        while (selectedIndexes.length < 20) {
+            const randomIndex = Math.floor(Math.random() * totalCharacters) + 1;
+            if (!selectedIndexes.includes(randomIndex)) {
+                selectedIndexes.push(randomIndex);
+            }
+        }
+        
+        const characters = selectedIndexes.map((index, i) => ({
+            name: `Personagem ${i + 1}`,
+            image: `src/images/personagens/personagem-${index}.png`
+        }));
 
-const person1 = document.getElementById("person1");
-const person2 = document.getElementById("person2");
-const person3 = document.getElementById("person3");
+        let currentCharacterIndex = 0;
+        let choices = { casa: [], beija: [], mata: [] };
 
-function shuffleImages() {
-  const shuffled = images.sort(() => 0.5 - Math.random());
-  person1.src = shuffled[0];
-  person2.src = shuffled[1];
-  person3.src = shuffled[2];
-}
+        const characterImg = document.getElementById('character-img');
+        const progressBar = document.getElementById('progress-bar');
+        const counter = document.getElementById('counter');
+        const resultsSection = document.getElementById('results');
+        const casaCount = document.getElementById('casa-count');
+        const beijaCount = document.getElementById('beija-count');
+        const mataCount = document.getElementById('mata-count');
+        const characterGrid = document.getElementById('character-grid');
+        const restartBtn = document.getElementById('restart-btn');
 
-document.querySelectorAll(".choices button").forEach(btn => {
-  btn.addEventListener("click", shuffleImages);
-});
+        function initGame() {
+            showCharacter(0);
+            document.querySelectorAll('.action-btn').forEach(btn => {
+                btn.addEventListener('click', handleChoice);
+            });
+            restartBtn.addEventListener('click', restartGame);
+        }
+
+        function showCharacter(index) {
+            const character = characters[index];
+            characterImg.src = character.image;
+            characterImg.alt = character.name;
+            counter.textContent = `Personagem ${index + 1} de ${characters.length}`;
+            progressBar.style.width = `${(index / characters.length) * 100}%`;
+        }
+
+        function handleChoice(e) {
+            const action = e.target.getAttribute('data-action');
+            const currentCharacter = characters[currentCharacterIndex];
+            choices[action].push(currentCharacter);
+            currentCharacterIndex++;
+            if (currentCharacterIndex >= characters.length) {
+                showResults();
+            } else {
+                showCharacter(currentCharacterIndex);
+            }
+        }
+
+        function showResults() {
+            document.querySelector('.character-container').style.display = 'none';
+            document.querySelector('.actions').style.display = 'none';
+            document.querySelector('.progress').style.display = 'none';
+            document.querySelector('.counter').style.display = 'none';
+            resultsSection.style.display = 'block';
+            casaCount.textContent = choices.casa.length;
+            beijaCount.textContent = choices.beija.length;
+            mataCount.textContent = choices.mata.length;
+            displayCharacterGrid('casa', choices.casa);
+            displayCharacterGrid('beija', choices.beija);
+            displayCharacterGrid('mata', choices.mata);
+        }
+
+        function displayCharacterGrid(action, chars) {
+            chars.forEach(character => {
+                const thumb = document.createElement('img');
+                thumb.className = 'character-thumb';
+                thumb.src = character.image;
+                thumb.alt = character.name;
+                thumb.title = character.name;
+                if (action === 'casa') {
+                    thumb.style.border = '3px solid #ffb6c1';
+                } else if (action === 'beija') {
+                    thumb.style.border = '3px solid #ff69b4';
+                } else {
+                    thumb.style.border = '3px solid #4b0082';
+                }
+                characterGrid.appendChild(thumb);
+            });
+        }
+
+        function restartGame() {
+            currentCharacterIndex = 0;
+            choices = { casa: [], beija: [], mata: [] };
+            characterGrid.innerHTML = '';
+            document.querySelector('.character-container').style.display = 'block';
+            document.querySelector('.actions').style.display = 'flex';
+            document.querySelector('.progress').style.display = 'block';
+            document.querySelector('.counter').style.display = 'block';
+            resultsSection.style.display = 'none';
+            
+            const newSelectedIndexes = [];
+            while (newSelectedIndexes.length < 20) {
+                const randomIndex = Math.floor(Math.random() * totalCharacters) + 1;
+                if (!newSelectedIndexes.includes(randomIndex)) {
+                    newSelectedIndexes.push(randomIndex);
+                }
+            }
+            
+            newSelectedIndexes.forEach((index, i) => {
+                characters[i] = {
+                    name: `Personagem ${i + 1}`,
+                    image: `src/images/personagens/personagem-${index}.png`
+                };
+            });
+            
+            showCharacter(0);
+        }
+
+        window.addEventListener('load', initGame);
