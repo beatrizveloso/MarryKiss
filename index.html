@@ -1,67 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MarryKiss</title>
-    <link rel="icon" href="src/images/ring.png" type="image/png">
-    <link rel="stylesheet" href="/src/css/style.css">
-</head>
-<body>
-    <div class="container">
-        <div class="text">
-            <div class="one">
-                <img src="http://www.gigaglitters.com/created/p2rSHmPBG4.gif" width="297" height="67" alt="" />
-            </div>
-            <div class="two">
-                <img src="http://www.gigaglitters.com/created/OoFuX2DV7h.gif" width="214" height="67" alt="" />
-            </div>
-        </div>
+    <link rel="icon" href="src/images/logo-marry.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-        <div class="character-container">
-            <img class="character-image" id="character-img" src="" alt="Personagem">
-        </div>
-        
-        <div class="progress">
-            <div class="progress-bar" id="progress-bar"></div>
-        </div>
-        
-        <div class="counter" id="counter">Personagem 1 de 20</div>
-        
-        <div class="actions">
-            <button class="action-btn casa" data-action="casa"></button>
-            <button class="action-btn beija" data-action="beija"></button>
-            <button class="action-btn mata" data-action="mata"></button>
-        </div>
-        
-        <div class="results" id="results">
-            <h2>Resultado Final</h2>
-            
-            <div class="result-item">
-                <div class="result-icon casa-icon"></div>
-                <div>Vocês casaram</div>
-                <div class="result-count" id="casa-count">0</div>
-            </div>
-            
-            <div class="result-item">
-                <div class="result-icon beija-icon"></div>
-                <div>Vocês beijaram</div>
-                <div class="result-count" id="beija-count">0</div>
-            </div>
-            
-            <div class="result-item">
-                <div class="result-icon mata-icon"></div>
-                <div>Você matou</div>
-                <div class="result-count" id="mata-count">0</div>
-            </div>
-            
-            <h3 style="margin-top: 20px;">Personagens que você escolheu:</h3>
-            <div class="character-grid" id="character-grid"></div>
-            
-            <button class="restart-btn" id="restart-btn">Jogar Novamente</button>
-        </div>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            background: url('src/images/background-pink.png') center/cover no-repeat;
+            font-family: "Inter", sans-serif;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .intro-text {
+            position: fixed;
+            left: 190px;
+            top: 450px;
+            width: 50vw;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.8;
+            color: #000;
+        }
+
+        .botao-start {
+            position: fixed;
+            bottom: 50px;
+            right: 50%;
+            transform: translateX(50%);
+            display: flex;
+            width: 402px;
+            height: 80px;
+            border-radius: 80px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            background: url('src/images/button-vamos-começar.png') center/cover no-repeat;
+            border: none;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="intro-text">
+        <p>One Time você diz yes, <br> outra você diz no: <br> but never say never!</p>
     </div>
 
-    <script src="/src/js/script.js"></script>
+    <a href="marrykiss.html">
+        <button class="botao-start"></button>
+    </a>
 </body>
+
 </html>

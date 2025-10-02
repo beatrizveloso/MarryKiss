@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarryKiss</title>
+    <link rel="icon" href="src/images/logo-marry.png" type="image/png">
+    <link rel="stylesheet" href="/src/css/marrykiss.css">
+</head>
+<body>
+    <div class="container">
+        <div class="text">
+            <div class="one">
+                <img src="http://www.gigaglitters.com/created/p2rSHmPBG4.gif" width="297" height="67" alt="" />
+            </div>
+            <div class="two">
+                <img src="http://www.gigaglitters.com/created/OoFuX2DV7h.gif" width="214" height="67" alt="" />
+            </div>
+        </div>
+
+        <div class="character-container">
+            <img class="character-image" id="character-img" src="" alt="Personagem">
+        </div>
+        
+        <div class="progress">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        
+        <div class="counter" id="counter">Personagem 1 de 20</div>
+        
+        <div class="actions">
+            <button class="action-btn casa" data-action="casa"></button>
+            <button class="action-btn beija" data-action="beija"></button>
+            <button class="action-btn mata" data-action="mata"></button>
+        </div>
+        
+        <div class="results" id="results">
+            <h2>Resultado Final</h2>
+            
+            <div class="result-item">
+                <div class="result-icon casa-icon"></div>
+                <div>Vocês casaram</div>
+                <div class="result-count" id="casa-count">0</div>
+            </div>
+            
+            <div class="result-item">
+                <div class="result-icon beija-icon"></div>
+                <div>Vocês beijaram</div>
+                <div class="result-count" id="beija-count">0</div>
+            </div>
+            
+            <div class="result-item">
+                <div class="result-icon mata-icon"></div>
+                <div>Você matou</div>
+                <div class="result-count" id="mata-count">0</div>
+            </div>
+            
+            <h3 style="margin-top: 20px;">Personagens que você escolheu:</h3>
+            <div class="character-grid" id="character-grid"></div>
+            
+            <button class="restart-btn" id="restart-btn">Jogar Novamente</button>
+        </div>
+    </div>
+
+    <script src="/src/js/script.js"></script>
+</body>
+</html>
