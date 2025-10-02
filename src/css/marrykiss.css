@@ -18,13 +18,22 @@
        margin: 0;
        height: 100vh;
    }
+ 
+   .gifs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   }
+
+   .two {
+    margin-left: -40px;
+   }
 
    .container {
-       background-color: rgba(255, 255, 255, 0.9);
        border-radius: 20px;
        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
        width: 90%;
-       max-width: 500px;
+       max-width: 900px;
        padding: 20px;
        text-align: center;
    }
@@ -33,6 +42,11 @@
        color: #9370db;
        margin-bottom: 20px;
        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+   }
+
+   h2, h3 {
+       color: #e2bbc3;
+       margin-bottom: 20px;
    }
 
    .character-container {
@@ -45,10 +59,12 @@
        height: 250px;
        object-fit: cover;
        border-radius: 50%;
-       border: 7px solid #FD5680;
        margin: 0 auto;
        display: block;
-       background-color: #ED9DB1;
+       border: 7px solid #ca5371;
+       background-color: #bd98a1;
+       /* border: 7px solid #FD5680;
+       background-color: #ED9DB1; */
    }
 
    .actions {
@@ -58,16 +74,12 @@
    }
 
    .action-btn {
-       width: 80px;
-       height: 80px;
+       width: 110px;
+       height: 110px;
        border-radius: 50%;
-       border: none;
        cursor: pointer;
-       background-size: 50%;
-       background-position: center;
-       background-repeat: no-repeat;
        transition: all 0.3s ease;
-       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+       box-sizing: border-box;
    }
 
    .action-btn:hover {
@@ -76,18 +88,24 @@
    }
 
    .action-btn.casa {
-       background-color: #ffb6c1;
        background-image: url('../images/ring.png');
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
    }
 
    .action-btn.beija {
-       background-color: #ff69b4;
        background-image: url('../images/kiss.png');
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
    }
 
    .action-btn.mata {
-       background-color: #4b0082;
        background-image: url('../images/kill.png');
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
    }
 
    .progress {
@@ -100,14 +118,15 @@
 
    .progress-bar {
        height: 100%;
-       background: linear-gradient(90deg, #ffb6c1, #9370db);
+       background: linear-gradient(90deg, #d1c5c7, #6b6264);
        width: 0%;
        transition: width 0.5s ease;
    }
 
    .counter {
        font-size: 18px;
-       color: #333;
+       font-weight: 400;
+       color: #ebdcdc;
        margin: 10px 0;
    }
 
@@ -137,17 +156,17 @@
    }
 
    .casa-icon {
-       background-color: #ffb6c1;
+       background-color: #81C2DE;
        background-image: url('src/images/ring.png');
    }
 
    .beija-icon {
-       background-color: #ff69b4;
+       background-color: #D5889B;
        background-image: url('src/images/kiss.png');
    }
 
    .mata-icon {
-       background-color: #4b0082;
+       background-color: #9F5E9E;
        background-image: url('src/images/kill.png');
    }
 
@@ -159,7 +178,7 @@
 
    .character-grid {
        display: grid;
-       grid-template-columns: repeat(3, 1fr);
+       grid-template-columns: repeat(10, 1fr);
        gap: 10px;
        margin-top: 20px;
    }
@@ -168,11 +187,11 @@
        width: 100%;
        height: 80px;
        object-fit: cover;
-       border-radius: 8px;
+       border-radius: 50%;
    }
 
    .restart-btn {
-       background: linear-gradient(90deg, #ffb6c1, #9370db);
+       background: linear-gradient(90deg, #d6959f, #c97c99);
        color: white;
        border: none;
        padding: 12px 25px;
@@ -189,14 +208,3 @@
        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
    }
 
-   @media (max-width: 500px) {
-       .action-btn {
-           width: 70px;
-           height: 70px;
-       }
-
-       .character-image {
-           width: 200px;
-           height: 200px;
-       }
-   }

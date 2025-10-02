@@ -59,6 +59,7 @@
             document.querySelector('.actions').style.display = 'none';
             document.querySelector('.progress').style.display = 'none';
             document.querySelector('.counter').style.display = 'none';
+            document.querySelector('.gifs').style.display = 'none';
             resultsSection.style.display = 'block';
             casaCount.textContent = choices.casa.length;
             beijaCount.textContent = choices.beija.length;
@@ -76,11 +77,11 @@
                 thumb.alt = character.name;
                 thumb.title = character.name;
                 if (action === 'casa') {
-                    thumb.style.border = '3px solid #ffb6c1';
+                    thumb.style.border = '3px solid #81C2DE';
                 } else if (action === 'beija') {
-                    thumb.style.border = '3px solid #ff69b4';
+                    thumb.style.border = '3px solid #D5889B';
                 } else {
-                    thumb.style.border = '3px solid #4b0082';
+                    thumb.style.border = '3px solid #9F5E9E';
                 }
                 characterGrid.appendChild(thumb);
             });
@@ -94,6 +95,7 @@
             document.querySelector('.actions').style.display = 'flex';
             document.querySelector('.progress').style.display = 'block';
             document.querySelector('.counter').style.display = 'block';
+               document.querySelector('.gifs').style.display = 'flex';
             resultsSection.style.display = 'none';
             
             const newSelectedIndexes = [];
