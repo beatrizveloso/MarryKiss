@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+.homepage-container {
+  height: 100vh;
+  width: 100vw;
+  background: url('../images/background-pink.png') center/cover no-repeat;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.homepage-text-section {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.homepage-content-wrapper {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.homepage-intro-text {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.8;
+  color: #000;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.homepage-start-button {
+  position: fixed;
+  bottom: 50px;
+  right: 50%;
+  transform: translateX(50%);
+  display: flex;
+  width: 402px;
+  height: 80px;
+  border-radius: 80px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  background: url('../images/button-vamos-começar.png') center/cover no-repeat;
+  border: none;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.homepage-start-button:hover {
+  transform: translateX(50%) scale(1.05);
+}
+
+.homepage-start-button:active {
+  transform: translateX(50%) scale(0.95);
+}
+
+@media (max-width: 768px) {
+  .homepage-text-section {
+    width: 100vw;
+  }
+  
+  .homepage-intro-text {
+    font-size: 20px;
+  }
+
+  .homepage-start-button {
+    width: 350px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .homepage-intro-text {
+    font-size: 18px;
+  }
+
+  .homepage-start-button {
+    width: 300px;
+    height: 60px;
+    bottom: 30px;
+  }
+}

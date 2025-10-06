@@ -1,0 +1,277 @@
+.marrykiss-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../../public/images/background-black.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.marrykiss-gifs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marrykiss-gif-two {
+  margin-left: -40px;
+}
+
+.marrykiss-container-main {
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 900px;
+  padding: 20px;
+  text-align: center;
+}
+
+.marrykiss-character-container {
+  margin: 20px 0;
+  position: relative;
+}
+
+.marrykiss-character-image {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: block;
+  border: 7px solid #ca5371;
+  background-color: #bd98a1;
+}
+
+.marrykiss-actions {
+  display: flex;
+  justify-content: space-around;
+  margin: 25px 0;
+}
+
+.marrykiss-action-btn {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  border: none;
+}
+
+.marrykiss-action-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.marrykiss-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.marrykiss-action-btn.marrykiss-casa {
+  background-image: url('../../../public/images/ring.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.marrykiss-action-btn.marrykiss-beija {
+  background-image: url('../../../public/images/kiss.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.marrykiss-action-btn.marrykiss-mata {
+  background-image: url('../../../public/images/kill.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.marrykiss-progress {
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  margin: 20px 0;
+  overflow: hidden;
+  width: 80%;
+  max-width: 600px;
+}
+
+.marrykiss-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #d1c5c7, #6b6264);
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+.marrykiss-counter {
+  font-size: 18px;
+  font-weight: 400;
+  color: #ebdcdc;
+  margin: 10px 0;
+}
+
+.marrykiss-results {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.marrykiss-result-item {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f8f8f8;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.marrykiss-result-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+  border-radius: 50%;
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.marrykiss-casa-icon {
+  background-color: #81C2DE;
+  background-image: url('../../../public/images/ring.png');
+}
+
+.marrykiss-beija-icon {
+  background-color: #D5889B;
+  background-image: url('../../../public/images/kiss.png');
+}
+
+.marrykiss-mata-icon {
+  background-color: #9F5E9E;
+  background-image: url('../../../public/images/kill.png');
+}
+
+.marrykiss-clicks-counter {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  font-weight: 700;
+  font-size: 22px;
+  color: #e0e0e0;
+}
+
+.marrykiss-click-info {
+  padding: 10px;
+}
+
+.marrykiss-result-count {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: auto;
+}
+
+.marrykiss-character-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.marrykiss-character-thumb {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.marrykiss-restart-btn {
+  background: linear-gradient(90deg, #d6959f, #c97c99);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.marrykiss-restart-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.marrykiss-results-title {
+  color: #e2bbc3;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .marrykiss-character-image {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .marrykiss-action-btn {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .marrykiss-clicks-counter {
+    font-size: 18px;
+    gap: 10px;
+  }
+  
+  .marrykiss-gif-one img,
+  .marrykiss-gif-two img {
+    width: 300px;
+    height: 100px;
+  }
+  
+  .marrykiss-gif-two {
+    margin-left: -30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .marrykiss-character-image {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .marrykiss-action-btn {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .marrykiss-clicks-counter {
+    font-size: 16px;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .marrykiss-gifs {
+    flex-direction: column;
+  }
+  
+  .marrykiss-gif-two {
+    margin-left: 0;
+    margin-top: -20px;
+  }
+}

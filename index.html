@@ -1,102 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="./public/images/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MarryKiss</title>
-    <link rel="icon" href="src/images/logo-marry.png">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            text-decoration: none;
-        }
-
-        body {
-            height: 100vh;
-            width: 100vw;
-            background: url('src/images/background-pink.png') center/cover no-repeat;
-            font-family: "Inter", sans-serif;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            position: relative;
-        }
-
-        .text {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 50vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: center;
-        }
-
-        .content {
-            height: 70vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        .intro-text {
-            font-size: 28px;
-            font-weight: 700;
-            line-height: 1.8;
-            color: #000;
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        .botao-start {
-            position: fixed;
-            bottom: 50px;
-            right: 50%;
-            transform: translateX(50%);
-            display: flex;
-            width: 402px;
-            height: 80px;
-            border-radius: 80px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            background: url('src/images/button-vamos-começar.png') center/cover no-repeat;
-            border: none;
-            cursor: pointer;
-            justify-content: center;
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .text {
-                width: 100vw;
-            }
-            
-            .intro-text {
-                font-size: 20px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <div class="text">
-        <div class="content">
-            <div class="intro-text">
-                <p>One Time você diz yes, <br> outra você diz no: <br> but never say never!</p>
-            </div>
-        </div>
-    </div>
-
-    <a href="marrykiss.html">
-        <button class="botao-start"></button>
-    </a>
-</body>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
