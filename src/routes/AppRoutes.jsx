@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"; 
-import HomePage from "../pages/homepage/HomePage"; 
-import MarryKiss from "../pages/MarryKiss/MarryKiss";
+import HomePage from "../pages/homepage/HomePage.jsx"; 
+import MarryKiss from "../pages/MarryKiss/MarryKiss.jsx";
 import ScrollToTop from "./ScrollToTop";
 
 const AppRoutes = () => { 
