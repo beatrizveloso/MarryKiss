@@ -5,6 +5,11 @@
   padding: 0%;
 }
 
+* {
+  cursor: url("/images/cursor.png"), auto !important;
+}
+
+
 #root {
   width: 100%;
   max-width: 1940px;
