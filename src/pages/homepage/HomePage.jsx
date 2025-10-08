@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 import './HomePage.css';
 
 const HomePage = () => {
-  const audioRef = useRef(null);
+  // const audioRef = useRef(null);
 
-  useEffect(() => {
-    audioRef.current = new Audio('/sounds/onetime.mp3');
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
-    };
-  }, []);
+  // useEffect(() => {
+  //   audioRef.current = new Audio('/sounds/onetime.mp3');
+  //   return () => {
+  //     if (audioRef.current) {
+  //       audioRef.current.pause();
+  //       audioRef.current.currentTime = 0;
+  //     }
+  //   };
+  // }, []);
 
   const playAudio = () => {
     const audio = audioRef.current;

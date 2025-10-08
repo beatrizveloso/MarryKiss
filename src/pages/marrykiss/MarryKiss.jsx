@@ -3,9 +3,9 @@ import { FaHeart, FaKiss, FaSkull, FaSave, FaArrowLeft, FaCheck, FaClock, FaCrow
 import html2canvas from 'html2canvas';
 import './MarryKiss.css';
 
-const marrySound = new Audio('/sounds/plim.mp3');
-const kissSound = new Audio('/sounds/kiss.mp3');
-const killSound = new Audio('/sounds/roblox-death.mp3');
+// const marrySound = new Audio('/sounds/plim.mp3');
+// const kissSound = new Audio('/sounds/kiss.mp3');
+// const killSound = new Audio('/sounds/roblox-death.mp3');
 
 const GameModeSelector = ({ onSelectMode }) => {
   const gameModes = [
@@ -80,50 +80,50 @@ const GameModeSelector = ({ onSelectMode }) => {
     <div className="mode-selector-container">
       <div className="mode-selector-header">
         <div className="gif-container">
-          <img src="http://www.gigaglitters.com/created/UW16Nm9wE1.gif" width="490" height="80" alt="Escolha seu"/>
+          <img src="http://www.gigaglitters.com/created/UW16Nm9wE1.gif" width="490" height="80" alt="Escolha seu" />
           <div className="align-gif">
-            <img src="http://www.gigaglitters.com/created/biHCvObvli.gif" width="550" height="80" alt="Modo de Jogo"/>
+            <img src="http://www.gigaglitters.com/created/biHCvObvli.gif" width="550" height="80" alt="Modo de Jogo" />
           </div>
         </div>
       </div>
-      
-   <div className="mode-grid">
-  <div className="mode-row">
-    {gameModes.slice(0, 3).map((mode) => (
-      <div 
-        key={mode.id}
-        className="mode-card"
-        onClick={() => handleModeSelect(mode.id)}
-      >
-        <img src={mode.image} alt={mode.id} className="mode-image" />
-      </div>
-    ))}
-  </div>
 
-  <div className="mode-row">
-    {gameModes.slice(3, 6).map((mode) => (
-      <div 
-        key={mode.id}
-        className="mode-card"
-        onClick={() => handleModeSelect(mode.id)}
-      >
-        <img src={mode.image} alt={mode.id} className="mode-image" />
-      </div>
-    ))}
-  </div>
+      <div className="mode-grid">
+        <div className="mode-row">
+          {gameModes.slice(0, 3).map((mode) => (
+            <div
+              key={mode.id}
+              className="mode-card"
+              onClick={() => handleModeSelect(mode.id)}
+            >
+              <img src={mode.image} alt={mode.id} className="mode-image" />
+            </div>
+          ))}
+        </div>
 
-  <div className="mode-row">
-    {gameModes.slice(6, 7).map((mode) => (
-      <div 
-        key={mode.id}
-        className="mode-card"
-        onClick={() => handleModeSelect(mode.id)}
-      >
-        <img src={mode.image} alt={mode.id} className="mode-image" />
+        <div className="mode-row">
+          {gameModes.slice(3, 6).map((mode) => (
+            <div
+              key={mode.id}
+              className="mode-card"
+              onClick={() => handleModeSelect(mode.id)}
+            >
+              <img src={mode.image} alt={mode.id} className="mode-image" />
+            </div>
+          ))}
+        </div>
+
+        <div className="mode-row">
+          {gameModes.slice(6, 7).map((mode) => (
+            <div
+              key={mode.id}
+              className="mode-card"
+              onClick={() => handleModeSelect(mode.id)}
+            >
+              <img src={mode.image} alt={mode.id} className="mode-image" />
+            </div>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-</div>
     </div>
   );
 };
@@ -133,47 +133,61 @@ const ClassicModeConfig = ({ onStart, onBack }) => {
 
   return (
     <div className="config-modal">
-      <div className="config-content">
-        <h2>Modo Clássico - Configuração</h2>
-        <p>Quantos personagens por rodada?</p>
-        
-        <div className="options-grid">
-          {[10, 15, 20, 30].map((count) => (
-            <div 
-              key={count}
-              className={`option-circle ${charactersCount === count ? 'selected' : ''}`}
-              onClick={() => setCharactersCount(count)}
-            >
-              {charactersCount === count && <FaCheck className="check-icon" />}
-              <span>{count}</span>
-            </div>
-          ))}
-        </div>
+      <div className="config-content fundo-modo">
+  <div className="align-content">
+    <img 
+      src="http://www.gigaglitters.com/created/6c1Anv6oN4.gif" 
+      width="270" 
+      height="67" 
+      border="0" 
+      alt="Modo Clássico" 
+    />
+  </div>
 
-        <div className="config-buttons">
-          <button className="start-config-btn" onClick={() => onStart(charactersCount)}>
-            <FaCheck /> Confirmar
-          </button>
-          <button className="back-config-btn" onClick={onBack}>
-            <FaArrowLeft /> Voltar
-          </button>
-        </div>
+  <p>Quantos personagens por rodada?</p>
+
+  <div className="options-grid">
+    {[10, 15, 20, 30].map((count) => (
+      <div
+        key={count}
+        className={`option-circle ${charactersCount === count ? 'selected' : ''}`}
+        onClick={() => setCharactersCount(count)}
+        style={{
+          backgroundImage: `url(/images/button-${count}.png)`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        {charactersCount === count && <FaCheck className="check-icon" />}
       </div>
+    ))}
+  </div>
+
+  <div className="config-buttons">
+    <button className="start-config-btn" onClick={() => onStart(charactersCount)}>
+      <FaCheck /> Confirmar
+    </button>
+    <button className="back-config-btn" onClick={onBack}>
+      <FaArrowLeft /> Voltar
+    </button>
+  </div>
+</div>
+
     </div>
   );
 };
 
 const CustomModeConfig = ({ onStart, onBack }) => {
-  const [categories, setCategories] = useState([
-    { id: 'actors', name: 'Atores', selected: false },
-    { id: 'heroes', name: 'Heróis', selected: false },
-    { id: 'singers', name: 'Cantores', selected: false },
-    { id: 'brazilians', name: 'Brasileiros', selected: false },
-    { id: 'characters', name: 'Personagens', selected: false }
-  ]);
+const [categories, setCategories] = useState([
+  { id: 'actors', name: 'Atores', selected: false, image: 'actors.png' },
+  { id: 'heroes', name: 'Heróis', selected: false, image: 'heroes.png' },
+  { id: 'singers', name: 'Cantores', selected: false, image: 'singers.png' },
+  { id: 'brazilians', name: 'Brasileiros', selected: false, image: 'brazilians.png' },
+  { id: 'characters', name: 'Personagens', selected: false, image: 'characters.png' }
+]);
 
   const toggleCategory = (categoryId) => {
-    setCategories(categories.map(cat => 
+    setCategories(categories.map(cat =>
       cat.id === categoryId ? { ...cat, selected: !cat.selected } : cat
     ));
   };
@@ -189,32 +203,59 @@ const CustomModeConfig = ({ onStart, onBack }) => {
 
   return (
     <div className="config-modal">
-      <div className="config-content">
-        <h2>Modo Personalizado</h2>
-        <p>Escolha as categorias:</p>
-        
-        <div className="categories-grid">
-          {categories.map((category) => (
-            <div 
-              key={category.id}
-              className={`category-option ${category.selected ? 'selected' : ''}`}
-              onClick={() => toggleCategory(category.id)}
-            >
-              {category.selected && <FaCheck className="check-icon" />}
-              <span>{category.name}</span>
-            </div>
-          ))}
-        </div>
 
-        <div className="config-buttons">
-          <button className="start-config-btn" onClick={handleStart}>
-            <FaCheck /> Começar Jogo
-          </button>
-          <button className="back-config-btn" onClick={onBack}>
-            <FaArrowLeft /> Voltar
-          </button>
-        </div>
+
+
+<div className="config-content2 fundo-modo2">
+  <div className="align-content">
+    <img 
+      src="http://www.gigaglitters.com/created/NGRFZ6FbFp.gif" 
+      width="116" 
+      height="67" 
+      border="0" 
+      alt="Modo" 
+    />
+    <img 
+      src="http://www.gigaglitters.com/created/uDMS7LMJ7S.gif" 
+      width="247"  
+      height="67" 
+      border="0" 
+      alt="Personalizado"
+    />
+  </div>
+
+  <p>Escolha as categorias:</p>
+
+  <div className="categories-grid">
+    {categories.map((category) => (
+      <div
+        key={category.id}
+        className={`category-option2 ${category.selected ? 'selected' : ''}`}
+        onClick={() => toggleCategory(category.id)}
+        style={{
+          backgroundImage: `url(/images/${category.image})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        {category.selected && <FaCheck className="check-icon2" />}
       </div>
+    ))}
+  </div>
+
+  <div className="config-buttons">
+    <button className="start-config-btn" onClick={handleStart}>
+      <FaCheck /> Começar Jogo
+    </button>
+    <button className="back-config-btn" onClick={onBack}>
+      <FaArrowLeft /> Voltar
+    </button>
+  </div>
+</div>
+
+
+
+
     </div>
   );
 };
@@ -260,8 +301,8 @@ const MarryKiss = () => {
   }
 
   return (
-    <GameScreen 
-      mode={currentMode} 
+    <GameScreen
+      mode={currentMode}
       config={gameConfig}
       onBack={() => setCurrentMode(null)}
     />
@@ -270,7 +311,7 @@ const MarryKiss = () => {
 
 const GameScreen = ({ mode, config, onBack }) => {
   const canvasRef = useRef(null);
-  
+
   const characterPool = {
     heroes: ['clark-kent', 'tony-stark', 'batman', 'thor', 'superman', 'deadpool', 'capitao-america', 'loki', 'peter-parker', 'bucky'],
     actors: ['wagner-moura', 'pedro-novaes', 'vladimir-brichta', 'the-rock', 'rodrigo-hilbert', 'michael-b-jordan', 'adriano', 'ronaldo-sobral', 'rodrigo-simas', 'tom-hiddleston', 'brad-pitt', 'leonardo-dicaprio', 'johnny-depp', 'tom-cruise', 'jason-momoa', 'keanu-reeves', 'ryan-reynolds', 'tom-holland', 'hugh-jackman'],
@@ -280,72 +321,72 @@ const GameScreen = ({ mode, config, onBack }) => {
   };
 
   const getConfig = () => {
-    switch(mode) {
-      case 'classic': return { 
-        characters: config.characters || 20, 
-        timer: null, 
-        singleRound: false, 
-        cards: false, 
-        reversed: false, 
-        limited: false 
+    switch (mode) {
+      case 'classic': return {
+        characters: config.characters || 20,
+        timer: null,
+        singleRound: false,
+        cards: false,
+        reversed: false,
+        limited: false
       };
-      case 'custom': return { 
-        characters: 20, 
-        timer: null, 
-        singleRound: false, 
-        cards: false, 
-        reversed: false, 
+      case 'custom': return {
+        characters: 20,
+        timer: null,
+        singleRound: false,
+        cards: false,
+        reversed: false,
         limited: false,
-        categories: config.categories 
+        categories: config.categories
       };
-      case 'ranking': return { 
-        characters: 15, 
-        timer: null, 
-        singleRound: false, 
-        cards: false, 
-        reversed: false, 
-        limited: true, 
-        rounds: 2 
+      case 'ranking': return {
+        characters: 15,
+        timer: null,
+        singleRound: false,
+        cards: false,
+        reversed: false,
+        limited: true,
+        rounds: 2
       };
-      case 'timed': return { 
-        characters: 20, 
-        timer: 5, 
-        singleRound: false, 
-        cards: false, 
-        reversed: false, 
-        limited: true 
+      case 'timed': return {
+        characters: 20,
+        timer: 5,
+        singleRound: false,
+        cards: false,
+        reversed: false,
+        limited: true
       };
-      case 'single': return { 
-        characters: 3, 
-        timer: null, 
-        singleRound: true, 
-        cards: false, 
-        reversed: false, 
-        limited: true 
+      case 'single': return {
+        characters: 3,
+        timer: null,
+        singleRound: true,
+        cards: false,
+        reversed: false,
+        limited: true
       };
-      case 'cards': return { 
-        characters: 10, 
-        timer: null, 
-        singleRound: false, 
-        cards: true, 
-        reversed: false, 
-        limited: false 
+      case 'cards': return {
+        characters: 10,
+        timer: null,
+        singleRound: false,
+        cards: true,
+        reversed: false,
+        limited: false
       };
-      case 'reversed': return { 
-        characters: 3, 
-        timer: null, 
-        singleRound: false, 
-        cards: false, 
-        reversed: true, 
-        limited: false 
+      case 'reversed': return {
+        characters: 3,
+        timer: null,
+        singleRound: false,
+        cards: false,
+        reversed: true,
+        limited: false
       };
-      default: return { 
-        characters: 20, 
-        timer: null, 
-        singleRound: false, 
-        cards: false, 
-        reversed: false, 
-        limited: true 
+      default: return {
+        characters: 20,
+        timer: null,
+        singleRound: false,
+        cards: false,
+        reversed: false,
+        limited: true
       };
     }
   };
@@ -354,10 +395,10 @@ const GameScreen = ({ mode, config, onBack }) => {
   const [characters, setCharacters] = useState([]);
   const [currentCharacterIndex, setCurrentCharacterIndex] = useState(0);
   const [choices, setChoices] = useState({ casa: [], beija: [], mata: [] });
-  const [clicksLeft, setClicksLeft] = useState({ 
-    casa: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999, 
-    beija: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999, 
-    mata: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999 
+  const [clicksLeft, setClicksLeft] = useState({
+    casa: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999,
+    beija: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999,
+    mata: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999
   });
   const [gameFinished, setGameFinished] = useState(false);
   const [timeLeft, setTimeLeft] = useState(gameConfig.timer);
@@ -386,7 +427,7 @@ const GameScreen = ({ mode, config, onBack }) => {
 
   const initializeCharacters = () => {
     let availableCharacters = [];
-    
+
     if (mode === 'custom' && config.categories) {
       config.categories.forEach(category => {
         if (characterPool[category.id]) {
@@ -429,7 +470,7 @@ const GameScreen = ({ mode, config, onBack }) => {
 
   const playSound = (action) => {
     try {
-      switch(action) {
+      switch (action) {
         case 'casa':
           marrySound.currentTime = 0;
           marrySound.play();
@@ -454,11 +495,11 @@ const GameScreen = ({ mode, config, onBack }) => {
 
     const currentCharacter = characters[currentCharacterIndex];
     const finalAction = gameConfig.reversed ? reversedActions[action] : action;
-    
+
     playSound(action);
 
     if (gameConfig.cards) {
-      const updatedCharacters = characters.map((char, index) => 
+      const updatedCharacters = characters.map((char, index) =>
         index === currentCharacterIndex ? { ...char, revealed: true } : char
       );
       setCharacters(updatedCharacters);
@@ -534,10 +575,10 @@ const GameScreen = ({ mode, config, onBack }) => {
   const restartGame = () => {
     setCurrentCharacterIndex(0);
     setChoices({ casa: [], beija: [], mata: [] });
-    setClicksLeft({ 
-      casa: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999, 
-      beija: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999, 
-      mata: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999 
+    setClicksLeft({
+      casa: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999,
+      beija: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999,
+      mata: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999
     });
     setGameFinished(false);
     setSingleRoundChoices({ casa: null, beija: null, mata: null });
@@ -556,14 +597,14 @@ const GameScreen = ({ mode, config, onBack }) => {
     if (gameConfig.ranking) {
       const player1 = playerChoices[0];
       const player2 = playerChoices[1];
-      
-      const commonMarry = player1.casa.filter(char1 => 
+
+      const commonMarry = player1.casa.filter(char1 =>
         player2.casa.some(char2 => char1.id === char2.id)
       );
-      const commonKiss = player1.beija.filter(char1 => 
+      const commonKiss = player1.beija.filter(char1 =>
         player2.beija.some(char2 => char1.id === char2.id)
       );
-      const commonKill = player1.mata.filter(char1 => 
+      const commonKill = player1.mata.filter(char1 =>
         player2.mata.some(char2 => char1.id === char2.id)
       );
 
@@ -571,7 +612,7 @@ const GameScreen = ({ mode, config, onBack }) => {
         <div className="marrykiss-container">
           <div className="marrykiss-results">
             <h2><FaCrown /> Ranking entre Amigos</h2>
-            
+
             <div className="ranking-comparison">
               <div className="player-result">
                 <h3>Jogador 1</h3>
@@ -592,7 +633,7 @@ const GameScreen = ({ mode, config, onBack }) => {
                   ))}
                 </div>
               </div>
-              
+
               <div className="player-result">
                 <h3>Jogador 2</h3>
                 <div className="player-stats">
@@ -653,7 +694,7 @@ const GameScreen = ({ mode, config, onBack }) => {
         <div className="marrykiss-container">
           <div className="marrykiss-results">
             <h2>Cartas Misteriosas - Resultado Final</h2>
-            
+
             <div className="character-images-results">
               {finalChoices.casa.length > 0 && (
                 <div className="result-category">
@@ -761,8 +802,8 @@ const GameScreen = ({ mode, config, onBack }) => {
     return (
       <div className="marrykiss-container">
         <div className="marrykiss-results">
-          <img src="http://www.gigaglitters.com/created/JCQbDFI3Oc.gif" width="399" height="67" border="0" alt="Resultado Final"/>
-          
+          <img src="http://www.gigaglitters.com/created/JCQbDFI3Oc.gif" width="399" height="67" border="0" alt="Resultado Final" />
+
           <div className="character-images-results">
             {choices.casa.length > 0 && (
               <div className="result-category">
@@ -830,7 +871,7 @@ const GameScreen = ({ mode, config, onBack }) => {
       <button className="back-button" onClick={onBack}>
         <FaArrowLeft /> Voltar
       </button>
-      
+
       {gameConfig.ranking && (
         <div className="player-indicator">
           <FaUserFriends /> Jogador {currentPlayer + 1}
@@ -854,10 +895,10 @@ const GameScreen = ({ mode, config, onBack }) => {
         )}
 
         <div className="marrykiss-character-container">
-          <img 
-            className={`marrykiss-character-image ${gameConfig.cards && !currentCharacter.revealed ? 'hidden' : ''}`} 
-            src={currentCharacter.image} 
-            alt={currentCharacter.name} 
+          <img
+            className={`marrykiss-character-image ${gameConfig.cards && !currentCharacter.revealed ? 'hidden' : ''}`}
+            src={currentCharacter.image}
+            alt={currentCharacter.name}
           />
           {gameConfig.cards && !currentCharacter.revealed && (
             <div className="card-back">
@@ -868,8 +909,8 @@ const GameScreen = ({ mode, config, onBack }) => {
         </div>
 
         <div className="marrykiss-progress">
-          <div 
-            className="marrykiss-progress-bar" 
+          <div
+            className="marrykiss-progress-bar"
             style={{ width: `${(currentCharacterIndex / characters.length) * 100}%` }}
           ></div>
         </div>
@@ -895,20 +936,20 @@ const GameScreen = ({ mode, config, onBack }) => {
         )}
 
         <div className="marrykiss-actions">
-          <button 
-            className="marrykiss-action-btn marrykiss-casa" 
+          <button
+            className="marrykiss-action-btn marrykiss-casa"
             onClick={() => handleChoice('casa')}
             disabled={(gameConfig.limited && clicksLeft.casa === 0) || (gameConfig.timer && timeLeft === 0) || (gameConfig.singleRound && singleRoundChoices.casa)}
             title="Casar"
           />
-          <button 
-            className="marrykiss-action-btn marrykiss-beija" 
+          <button
+            className="marrykiss-action-btn marrykiss-beija"
             onClick={() => handleChoice('beija')}
             disabled={(gameConfig.limited && clicksLeft.beija === 0) || (gameConfig.timer && timeLeft === 0) || (gameConfig.singleRound && singleRoundChoices.beija)}
             title="Beijar"
           />
-          <button 
-            className="marrykiss-action-btn marrykiss-mata" 
+          <button
+            className="marrykiss-action-btn marrykiss-mata"
             onClick={() => handleChoice('mata')}
             disabled={(gameConfig.limited && clicksLeft.mata === 0) || (gameConfig.timer && timeLeft === 0) || (gameConfig.singleRound && singleRoundChoices.mata)}
             title="Matar"
