@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaHeart, FaKiss, FaSkull, FaSave, FaArrowLeft, FaCheck, FaClock, FaCrown, FaRandom, FaUserFriends, FaExclamationTriangle } from 'react-icons/fa';
+import html2canvas from 'html2canvas';
 import './MarryKiss.css';
 
 const marrySound = new Audio('/sounds/plim.mp3');
@@ -79,24 +80,50 @@ const GameModeSelector = ({ onSelectMode }) => {
     <div className="mode-selector-container">
       <div className="mode-selector-header">
         <div className="gif-container">
-          <img src="http://www.gigaglitters.com/created/UW16Nm9wE1.gif" width="290" height="80" alt="Escolha seu"/>
+          <img src="http://www.gigaglitters.com/created/UW16Nm9wE1.gif" width="490" height="80" alt="Escolha seu"/>
           <div className="align-gif">
-            <img src="http://www.gigaglitters.com/created/biHCvObvli.gif" width="340" height="80" alt="Modo de Jogo"/>
+            <img src="http://www.gigaglitters.com/created/biHCvObvli.gif" width="550" height="80" alt="Modo de Jogo"/>
           </div>
         </div>
       </div>
       
-      <div className="mode-grid">
-        {gameModes.map((mode) => (
-          <div 
-            key={mode.id}
-            className="mode-card"
-            onClick={() => handleModeSelect(mode.id)}
-          >
-            <img src={mode.image} alt={mode.id} className="mode-image" />
-          </div>
-        ))}
+   <div className="mode-grid">
+  <div className="mode-row">
+    {gameModes.slice(0, 3).map((mode) => (
+      <div 
+        key={mode.id}
+        className="mode-card"
+        onClick={() => handleModeSelect(mode.id)}
+      >
+        <img src={mode.image} alt={mode.id} className="mode-image" />
       </div>
+    ))}
+  </div>
+
+  <div className="mode-row">
+    {gameModes.slice(3, 6).map((mode) => (
+      <div 
+        key={mode.id}
+        className="mode-card"
+        onClick={() => handleModeSelect(mode.id)}
+      >
+        <img src={mode.image} alt={mode.id} className="mode-image" />
+      </div>
+    ))}
+  </div>
+
+  <div className="mode-row">
+    {gameModes.slice(6, 7).map((mode) => (
+      <div 
+        key={mode.id}
+        className="mode-card"
+        onClick={() => handleModeSelect(mode.id)}
+      >
+        <img src={mode.image} alt={mode.id} className="mode-image" />
+      </div>
+    ))}
+  </div>
+</div>
     </div>
   );
 };
@@ -111,7 +138,7 @@ const ClassicModeConfig = ({ onStart, onBack }) => {
         <p>Quantos personagens por rodada?</p>
         
         <div className="options-grid">
-          {[30, 20, 15, 10].map((count) => (
+          {[10, 15, 20, 30].map((count) => (
             <div 
               key={count}
               className={`option-circle ${charactersCount === count ? 'selected' : ''}`}
@@ -305,7 +332,7 @@ const GameScreen = ({ mode, config, onBack }) => {
         limited: false 
       };
       case 'reversed': return { 
-        characters: 20, 
+        characters: 3, 
         timer: null, 
         singleRound: false, 
         cards: false, 
@@ -327,7 +354,11 @@ const GameScreen = ({ mode, config, onBack }) => {
   const [characters, setCharacters] = useState([]);
   const [currentCharacterIndex, setCurrentCharacterIndex] = useState(0);
   const [choices, setChoices] = useState({ casa: [], beija: [], mata: [] });
-  const [clicksLeft, setClicksLeft] = useState({ casa: gameConfig.limited ? 10 : 999, beija: gameConfig.limited ? 10 : 999, mata: gameConfig.limited ? 10 : 999 });
+  const [clicksLeft, setClicksLeft] = useState({ 
+    casa: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999, 
+    beija: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999, 
+    mata: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999 
+  });
   const [gameFinished, setGameFinished] = useState(false);
   const [timeLeft, setTimeLeft] = useState(gameConfig.timer);
   const [singleRoundChoices, setSingleRoundChoices] = useState({ casa: null, beija: null, mata: null });
@@ -335,6 +366,7 @@ const GameScreen = ({ mode, config, onBack }) => {
   const [currentRound, setCurrentRound] = useState(1);
   const [playerChoices, setPlayerChoices] = useState([{ casa: [], beija: [], mata: [] }, { casa: [], beija: [], mata: [] }]);
   const [currentPlayer, setCurrentPlayer] = useState(0);
+  const [revealedCards, setRevealedCards] = useState([]);
 
   useEffect(() => {
     initializeCharacters();
@@ -382,6 +414,7 @@ const GameScreen = ({ mode, config, onBack }) => {
     }));
 
     setCharacters(newCharacters);
+    setRevealedCards([]);
 
     if (gameConfig.reversed) {
       const actions = ['casa', 'beija', 'mata'];
@@ -429,6 +462,7 @@ const GameScreen = ({ mode, config, onBack }) => {
         index === currentCharacterIndex ? { ...char, revealed: true } : char
       );
       setCharacters(updatedCharacters);
+      setRevealedCards(prev => [...prev, { character: currentCharacter, action: finalAction }]);
     }
 
     if (gameConfig.singleRound) {
@@ -486,75 +520,25 @@ const GameScreen = ({ mode, config, onBack }) => {
   };
 
   const saveAsPng = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    
-    canvas.width = 800;
-    canvas.height = 600;
-    
-    ctx.fillStyle = '#ca5371';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    ctx.fillStyle = 'white';
-    ctx.font = '30px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('Resultado - Casa, Beija ou Mata', canvas.width / 2, 50);
-    
-    let yPos = 120;
-    
-    if (choices.casa.length > 0) {
-      ctx.font = '20px Arial';
-      ctx.fillText(`Casar: ${choices.casa.length}`, canvas.width / 2, yPos);
-      yPos += 40;
-      
-      let xPos = 100;
-      choices.casa.forEach((char, index) => {
-        if (index < 8) {
-          const img = new Image();
-          img.src = char.image;
-          img.onload = () => {
-            ctx.drawImage(img, xPos, yPos, 50, 50);
-            xPos += 70;
-          };
-        }
-      });
-      yPos += 80;
-    }
-    
-    if (choices.beija.length > 0) {
-      ctx.fillText(`Beijar: ${choices.beija.length}`, canvas.width / 2, yPos);
-      yPos += 40;
-      
-      let xPos = 100;
-      choices.beija.forEach((char, index) => {
-        if (index < 8) {
-          const img = new Image();
-          img.src = char.image;
-          img.onload = () => {
-            ctx.drawImage(img, xPos, yPos, 50, 50);
-            xPos += 70;
-          };
-        }
-      });
-      yPos += 80;
-    }
-    
-    if (choices.mata.length > 0) {
-      ctx.fillText(`Matar: ${choices.mata.length}`, canvas.width / 2, yPos);
-    }
-    
-    setTimeout(() => {
+    const resultsContainer = document.querySelector('.marrykiss-results');
+    if (!resultsContainer) return;
+
+    html2canvas(resultsContainer).then(canvas => {
       const link = document.createElement('a');
       link.download = 'resultado-marrykiss.png';
       link.href = canvas.toDataURL();
       link.click();
-    }, 500);
+    });
   };
 
   const restartGame = () => {
     setCurrentCharacterIndex(0);
     setChoices({ casa: [], beija: [], mata: [] });
-    setClicksLeft({ casa: gameConfig.limited ? 10 : 999, beija: gameConfig.limited ? 10 : 999, mata: gameConfig.limited ? 10 : 999 });
+    setClicksLeft({ 
+      casa: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999, 
+      beija: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999, 
+      mata: gameConfig.limited ? (mode === 'ranking' ? 5 : 10) : 999 
+    });
     setGameFinished(false);
     setSingleRoundChoices({ casa: null, beija: null, mata: null });
     setTimeLeft(gameConfig.timer);
@@ -562,6 +546,7 @@ const GameScreen = ({ mode, config, onBack }) => {
     setCurrentRound(1);
     setCurrentPlayer(0);
     setPlayerChoices([{ casa: [], beija: [], mata: [] }, { casa: [], beija: [], mata: [] }]);
+    setRevealedCards([]);
     initializeCharacters();
   };
 
@@ -653,7 +638,64 @@ const GameScreen = ({ mode, config, onBack }) => {
               </button>
             </div>
           </div>
-          <canvas ref={canvasRef} style={{ display: 'none' }} />
+        </div>
+      );
+    }
+
+    if (gameConfig.cards) {
+      const finalChoices = {
+        casa: revealedCards.filter(card => card.action === 'casa').map(card => card.character),
+        beija: revealedCards.filter(card => card.action === 'beija').map(card => card.character),
+        mata: revealedCards.filter(card => card.action === 'mata').map(card => card.character)
+      };
+
+      return (
+        <div className="marrykiss-container">
+          <div className="marrykiss-results">
+            <h2>Cartas Misteriosas - Resultado Final</h2>
+            
+            <div className="character-images-results">
+              {finalChoices.casa.length > 0 && (
+                <div className="result-category">
+                  <h4><FaHeart /> Casamentos</h4>
+                  <div className="character-thumbnails">
+                    {finalChoices.casa.map((char, index) => (
+                      <img key={index} src={char.image} alt={char.name} className="character-thumb" />
+                    ))}
+                  </div>
+                </div>
+              )}
+              {finalChoices.beija.length > 0 && (
+                <div className="result-category">
+                  <h4><FaKiss /> Beijos</h4>
+                  <div className="character-thumbnails">
+                    {finalChoices.beija.map((char, index) => (
+                      <img key={index} src={char.image} alt={char.name} className="character-thumb" />
+                    ))}
+                  </div>
+                </div>
+              )}
+              {finalChoices.mata.length > 0 && (
+                <div className="result-category">
+                  <h4><FaSkull /> Mortes</h4>
+                  <div className="character-thumbnails">
+                    {finalChoices.mata.map((char, index) => (
+                      <img key={index} src={char.image} alt={char.name} className="character-thumb" />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="action-buttons">
+              <button className="marrykiss-restart-btn" onClick={restartGame}>
+                Jogar Novamente
+              </button>
+              <button className="marrykiss-back-btn" onClick={onBack}>
+                <FaArrowLeft /> Voltar aos Modos
+              </button>
+            </div>
+          </div>
         </div>
       );
     }
@@ -716,23 +758,15 @@ const GameScreen = ({ mode, config, onBack }) => {
       );
     }
 
-    const showFinalPhrase = !['single', 'reversed', 'cards'].includes(mode);
-
     return (
       <div className="marrykiss-container">
         <div className="marrykiss-results">
           <img src="http://www.gigaglitters.com/created/JCQbDFI3Oc.gif" width="399" height="67" border="0" alt="Resultado Final"/>
           
-          {showFinalPhrase && (
-            <div className="final-phrase">
-              {getFinalPhrase()}
-            </div>
-          )}
-
           <div className="character-images-results">
             {choices.casa.length > 0 && (
               <div className="result-category">
-                <h4><img src="/images/ring.png" alt="Casar" className="action-icon" /> Casamentos</h4>
+                <h4><FaHeart /> Casamentos</h4>
                 <div className="character-thumbnails">
                   {choices.casa.map((char, index) => (
                     <img key={index} src={char.image} alt={char.name} className="character-thumb" />
@@ -742,7 +776,7 @@ const GameScreen = ({ mode, config, onBack }) => {
             )}
             {choices.beija.length > 0 && (
               <div className="result-category">
-                <h4><img src="/images/kiss.png" alt="Beijar" className="action-icon" /> Beijos</h4>
+                <h4><FaKiss /> Beijos</h4>
                 <div className="character-thumbnails">
                   {choices.beija.map((char, index) => (
                     <img key={index} src={char.image} alt={char.name} className="character-thumb" />
@@ -752,7 +786,7 @@ const GameScreen = ({ mode, config, onBack }) => {
             )}
             {choices.mata.length > 0 && (
               <div className="result-category">
-                <h4><img src="/images/kill.png" alt="Matar" className="action-icon" /> Mortes</h4>
+                <h4><FaSkull /> Mortes</h4>
                 <div className="character-thumbnails">
                   {choices.mata.map((char, index) => (
                     <img key={index} src={char.image} alt={char.name} className="character-thumb" />
@@ -777,30 +811,19 @@ const GameScreen = ({ mode, config, onBack }) => {
             </button>
           </div>
         </div>
-        <canvas ref={canvasRef} style={{ display: 'none' }} />
       </div>
     );
   }
 
   if (!currentCharacter) {
-    return <div className="marrykiss-container">Carregando...</div>;
-  }
-
-  const getButtonContent = (action) => {
-    if (gameConfig.singleRound && singleRoundChoices[action]) {
-      return null;
-    }
-    
     return (
-      <div className="button-image-container">
-        <img 
-          src={`/images/${action}.png`} 
-          alt={action} 
-          className="button-image"
-        />
+      <div className="marrykiss-container">
+        <div className="loading-screen">
+          <h2>Carregando...</h2>
+        </div>
       </div>
     );
-  };
+  }
 
   return (
     <div className="marrykiss-container">
@@ -814,100 +837,92 @@ const GameScreen = ({ mode, config, onBack }) => {
         </div>
       )}
 
-      <div className="marrykiss-gifs">
-        <div className="gif-container">
-          <img src="http://www.gigaglitters.com/created/XlVRYtOeJf.gif" width="420" height="130" alt="Clique no seu" />
-          <div className="gif-destino">
-            <img src="http://www.gigaglitters.com/created/PlTwvLjqPJ.gif" width="270" height="130" alt="destino!" />
+      <div className="game-content">
+        <div className="marrykiss-gifs">
+          <div className="gif-container">
+            <img src="http://www.gigaglitters.com/created/XlVRYtOeJf.gif" width="420" height="130" alt="Clique no seu" />
+            <div className="gif-destino">
+              <img src="http://www.gigaglitters.com/created/PlTwvLjqPJ.gif" width="270" height="130" alt="destino!" />
+            </div>
           </div>
         </div>
-      </div>
 
-      {gameConfig.timer && (
-        <div className="timer">
-          <FaClock /> {timeLeft}s
+        {gameConfig.timer && (
+          <div className="timer">
+            <FaClock /> {timeLeft}s
+          </div>
+        )}
+
+        <div className="marrykiss-character-container">
+          <img 
+            className={`marrykiss-character-image ${gameConfig.cards && !currentCharacter.revealed ? 'hidden' : ''}`} 
+            src={currentCharacter.image} 
+            alt={currentCharacter.name} 
+          />
+          {gameConfig.cards && !currentCharacter.revealed && (
+            <div className="card-back">
+              <FaRandom className="card-icon" />
+              <span>Mistério</span>
+            </div>
+          )}
         </div>
-      )}
 
-      <div className="marrykiss-character-container">
-        <img 
-          className={`marrykiss-character-image ${gameConfig.cards && !currentCharacter.revealed ? 'hidden' : ''}`} 
-          src={currentCharacter.image} 
-          alt={currentCharacter.name} 
-        />
-        {gameConfig.cards && !currentCharacter.revealed && (
-          <div className="card-back">
-            <FaRandom className="card-icon" />
-            <span>Mistério</span>
+        <div className="marrykiss-progress">
+          <div 
+            className="marrykiss-progress-bar" 
+            style={{ width: `${(currentCharacterIndex / characters.length) * 100}%` }}
+          ></div>
+        </div>
+
+        <div className="marrykiss-counter">
+          <p>Personagem {currentCharacterIndex + 1} de {characters.length}</p>
+        </div>
+
+        {!gameConfig.singleRound && gameConfig.limited && (
+          <div className="marrykiss-clicks-counter">
+            <div className="marrykiss-click-info"><FaHeart />: {clicksLeft.casa}</div>
+            <div className="marrykiss-click-info"><FaKiss />: {clicksLeft.beija}</div>
+            <div className="marrykiss-click-info"><FaSkull />: {clicksLeft.mata}</div>
+          </div>
+        )}
+
+        {gameConfig.singleRound && (
+          <div className="single-round-info">
+            <div><FaHeart />: {singleRoundChoices.casa ? '✓' : '?'}</div>
+            <div><FaKiss />: {singleRoundChoices.beija ? '✓' : '?'}</div>
+            <div><FaSkull />: {singleRoundChoices.mata ? '✓' : '?'}</div>
+          </div>
+        )}
+
+        <div className="marrykiss-actions">
+          <button 
+            className="marrykiss-action-btn marrykiss-casa" 
+            onClick={() => handleChoice('casa')}
+            disabled={(gameConfig.limited && clicksLeft.casa === 0) || (gameConfig.timer && timeLeft === 0) || (gameConfig.singleRound && singleRoundChoices.casa)}
+            title="Casar"
+          />
+          <button 
+            className="marrykiss-action-btn marrykiss-beija" 
+            onClick={() => handleChoice('beija')}
+            disabled={(gameConfig.limited && clicksLeft.beija === 0) || (gameConfig.timer && timeLeft === 0) || (gameConfig.singleRound && singleRoundChoices.beija)}
+            title="Beijar"
+          />
+          <button 
+            className="marrykiss-action-btn marrykiss-mata" 
+            onClick={() => handleChoice('mata')}
+            disabled={(gameConfig.limited && clicksLeft.mata === 0) || (gameConfig.timer && timeLeft === 0) || (gameConfig.singleRound && singleRoundChoices.mata)}
+            title="Matar"
+          />
+        </div>
+
+        {gameConfig.timer && timeLeft < 3 && (
+          <div className="time-warning">
+            <FaExclamationTriangle /> Rápido!
           </div>
         )}
       </div>
-
-      <div className="marrykiss-progress">
-        <div 
-          className="marrykiss-progress-bar" 
-          style={{ width: `${(currentCharacterIndex / characters.length) * 100}%` }}
-        ></div>
-      </div>
-
-      <div className="marrykiss-counter">
-        <p>Personagem {currentCharacterIndex + 1} de {characters.length}</p>
-      </div>
-
-      {!gameConfig.singleRound && gameConfig.limited && (
-        <div className="marrykiss-clicks-counter">
-          <div className="marrykiss-click-info"><FaHeart />: {clicksLeft.casa}</div>
-          <div className="marrykiss-click-info"><FaKiss />: {clicksLeft.beija}</div>
-          <div className="marrykiss-click-info"><FaSkull />: {clicksLeft.mata}</div>
-        </div>
-      )}
-
-      {gameConfig.singleRound && (
-        <div className="single-round-info">
-          <div><FaHeart />: {singleRoundChoices.casa ? '✓' : '?'}</div>
-          <div><FaKiss />: {singleRoundChoices.beija ? '✓' : '?'}</div>
-          <div><FaSkull />: {singleRoundChoices.mata ? '✓' : '?'}</div>
-        </div>
-      )}
-
-      <div className="marrykiss-actions">
-        <button 
-          className="marrykiss-action-btn marrykiss-casa" 
-          onClick={() => handleChoice('casa')}
-          disabled={(gameConfig.limited && clicksLeft.casa === 0) || (gameConfig.timer && timeLeft === 0) || (gameConfig.singleRound && singleRoundChoices.casa)}
-          title="Casar"
-        >
-          
-        </button>
-        <button 
-          className="marrykiss-action-btn marrykiss-beija" 
-          onClick={() => handleChoice('beija')}
-          disabled={(gameConfig.limited && clicksLeft.beija === 0) || (gameConfig.timer && timeLeft === 0) || (gameConfig.singleRound && singleRoundChoices.beija)}
-          title="Beijar"
-        >
-          
-        </button>
-        <button 
-          className="marrykiss-action-btn marrykiss-mata" 
-          onClick={() => handleChoice('mata')}
-          disabled={(gameConfig.limited && clicksLeft.mata === 0) || (gameConfig.timer && timeLeft === 0) || (gameConfig.singleRound && singleRoundChoices.mata)}
-          title="Matar"
-        >
-         
-        </button>
-      </div>
-
-      {gameConfig.timer && timeLeft < 3 && (
-        <div className="time-warning">
-          <FaExclamationTriangle /> Rápido!
-        </div>
-      )}
     </div>
   );
-};
-
-const getFinalPhrase = () => {
-  return "Obrigado por jogar!";
 };
 
 export default MarryKiss;
