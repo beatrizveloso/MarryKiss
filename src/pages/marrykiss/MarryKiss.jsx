@@ -3,10 +3,6 @@ import { FaHeart, FaKiss, FaSkull, FaSave, FaArrowLeft, FaCheck, FaClock, FaCrow
 import html2canvas from 'html2canvas';
 import './MarryKiss.css';
 
-// const marrySound = new Audio('/sounds/plim.mp3');
-// const kissSound = new Audio('/sounds/kiss.mp3');
-// const killSound = new Audio('/sounds/roblox-death.mp3');
-
 const GameModeSelector = ({ onSelectMode }) => {
   const gameModes = [
     { id: 'classic', image: '/images/modo-classico.png' },
@@ -204,8 +200,6 @@ const [categories, setCategories] = useState([
   return (
     <div className="config-modal">
 
-
-
 <div className="config-content2 fundo-modo2">
   <div className="align-content">
     <img 
@@ -252,9 +246,6 @@ const [categories, setCategories] = useState([
     </button>
   </div>
 </div>
-
-
-
 
     </div>
   );
@@ -314,10 +305,10 @@ const GameScreen = ({ mode, config, onBack }) => {
 
   const characterPool = {
     heroes: ['clark-kent', 'tony-stark', 'batman', 'thor', 'superman', 'deadpool', 'capitao-america', 'loki', 'peter-parker', 'bucky'],
-    actors: ['wagner-moura', 'pedro-novaes', 'vladimir-brichta', 'the-rock', 'rodrigo-hilbert', 'michael-b-jordan', 'adriano', 'ronaldo-sobral', 'rodrigo-simas', 'tom-hiddleston', 'brad-pitt', 'leonardo-dicaprio', 'johnny-depp', 'tom-cruise', 'jason-momoa', 'keanu-reeves', 'ryan-reynolds', 'tom-holland', 'hugh-jackman'],
-    singers: ['harry-styles', 'justin-bieber', 'shawn-mendes', 'zayn-malik', 'bruno-mars'],
-    brazilians: ['wagner-moura', 'pedro-novaes', 'vladimir-brichta', 'rodrigo-hilbert', 'adriano', 'ronaldo-sobral', 'rodrigo-simas'],
-    characters: ['ben-10', 'damon-salvatore', 'christian-grey', 'dean-winchester', 'toretto', 'george-weasley', 'thomas-shelby', 'detona-ralph', 'sherlock-holmes', 'jack-frost', 'raposa-do-zootopia', 'harry-potter', 'draco-malfoy', 'croods', 'javier-pena']
+    actors: ['wagner-moura', 'pedro-novaes', 'vladimir-brichta', 'the-rock', 'rodrigo-hilbert', 'michael-b-jordan', 'adriano', 'ronaldo-sobral', 'rodrigo-simas', 'tom-hiddleston', 'brad-pitt', 'leonardo-dicaprio', 'johnny-depp', 'tom-cruise', 'jason-momoa', 'keanu-reeves', 'ryan-reynolds', 'tom-holland', 'hugh-jackman', 'jesus-turco', 'serkan-bolat', 'selton-mello', 'danton-mello', 'ryan-gosling', 'gerard-butler', 'rafael-silva', 'gabriel-leone', 'marco-pigossi', 'humberto-carrao', 'chay-suede', 'jonathan-bailey', 'alexandre-nero', 'eric-winter', 'rafa-vitti', 'carlo-porto', 'reynaldo-gianecchini', 'zac-efron'],
+    singers: ['harry-styles', 'justin-bieber', 'shawn-mendes', 'zayn-malik', 'bruno-mars', 'ze-felipe'],
+    brazilians: ['wagner-moura', 'pedro-novaes', 'vladimir-brichta', 'rodrigo-hilbert', 'adriano', 'ronaldo-sobral', 'rodrigo-simas', 'jesus-turco', 'selton-mello', 'danton-mello', 'rafael-silva', 'gabriel-leone', 'marco-pigossi', 'humberto-carrao', 'chay-suede', 'alexandre-nero', 'rafa-vitti', 'carlo-porto', 'reynaldo-gianecchini', 'ze-felipe'],
+    characters: ['ben-10', 'damon-salvatore', 'christian-grey', 'dean-winchester', 'toretto', 'george-weasley', 'thomas-shelby', 'detona-ralph', 'sherlock-holmes', 'jack-frost', 'raposa-do-zootopia', 'harry-potter', 'draco-malfoy', 'croods', 'javier-pena', 'romulo-estrela', 'peter-kavinsky', 'sam-winchester', 'tiago-larcerda', 'chandler-bing', 'derek-greys', 'colin-donnell', 'jacob-black', 'simon-basset', 'klaus-mikaelson']
   };
 
   const getConfig = () => {
@@ -472,16 +463,10 @@ const GameScreen = ({ mode, config, onBack }) => {
     try {
       switch (action) {
         case 'casa':
-          marrySound.currentTime = 0;
-          marrySound.play();
           break;
         case 'beija':
-          kissSound.currentTime = 0;
-          kissSound.play();
           break;
         case 'mata':
-          killSound.currentTime = 0;
-          killSound.play();
           break;
       }
     } catch (error) {
